@@ -1,0 +1,12 @@
+<!-- product-card.component.html -->
+<div class="product-card" (click)="navigateToProductDetails(product?.id || 1)">
+    <div class="product-image">
+      <img [src]="product?.imageUrl" alt="{{ product?.name }}" />
+    </div>
+    <div class="product-details">
+      <h3>{{ product?.name }}</h3>
+      <p class="product-description">{{ product?.description }}</p>
+      <p class="product-price">$ {{ product?.price}}</p>
+    </div>
+  </div>
+  
