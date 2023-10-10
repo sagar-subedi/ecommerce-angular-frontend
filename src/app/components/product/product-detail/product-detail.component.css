@@ -1,3 +1,17 @@
 img {
     height: 300px;
 }
+
+.product-details{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column  ;
+    height: 100%;
+    width: 100%;
+}
+
+.add-to-cart-button {
+    width:300px;
+}

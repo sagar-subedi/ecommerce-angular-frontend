@@ -6,6 +6,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ProductDetailComponent } from './components/product/product-detail/product-detail.component';
 import { CartComponent } from './components/cart/cart.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { roleGuard } from './role.guard';
 
 const routes: Routes = [
 
@@ -19,7 +20,11 @@ const routes: Routes = [
     path:"login", component: LoginComponent
   },
   { path: 'product/:id', component: ProductDetailComponent },
-  { path: 'cart', component: CartComponent },
+  { path: 'cart',
+   component: CartComponent,
+   canActivate: [roleGuard], // Apply the RoleGuard function to the user route
+   data: { allowedRoles: ['ROLE_USER', 'ROLE_ADMIN'] }, // Allow 'ROLE_USER' and 'ROLE_ADMIN'
+  },
   {path:'orders', component: OrdersComponent}
 
 ];

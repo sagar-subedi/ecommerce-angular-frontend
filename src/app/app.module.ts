@@ -18,6 +18,11 @@ import { ProductDetailComponent } from './components/product/product-detail/prod
 import { ProductCardComponent } from './components/product/product-card/product-card.component';
 import { CartComponent } from './components/cart/cart.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './store/counter.reducer';
+import { StoreDevtools } from '@ngrx/store-devtools';
+import { StateComponent } from './services/state/state.component';
+import { cartReducer } from './store/cart/cart.reducer';
 
 
 @NgModule({
@@ -30,7 +35,8 @@ import { OrdersComponent } from './components/orders/orders.component';
     ProductDetailComponent,
     ProductCardComponent,
     CartComponent,
-    OrdersComponent
+    OrdersComponent,
+    StateComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +46,8 @@ import { OrdersComponent } from './components/orders/orders.component';
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     ToastrModule.forRoot(),
+    StoreModule.forRoot({count: counterReducer,
+    cart: cartReducer}),
     BrowserAnimationsModule,
     FormsModule
     
