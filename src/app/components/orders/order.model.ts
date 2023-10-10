@@ -1,13 +1,14 @@
-import { CartItem } from "../cart/cart-item.model";
+import { OrderItem } from "./orderItem.model";
+
 
 export interface Order {
-    orderId: string; 
+    id?: string; 
     customerName: string;
-    orderDate: Date;
+    orderDate?: Date;
     shippingAddress: string; 
     totalAmount: number; 
-    orderItems: CartItem[];
-    orderStatus: OrderStatus; 
+    orderItems: OrderItem[];
+    orderStatus?: OrderStatus; 
   }
   
   

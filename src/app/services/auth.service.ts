@@ -5,6 +5,9 @@ import { Observable, map, tap, throwError } from 'rxjs';
 import { LoginRequestPayload } from '../components/auth/login/login-request.payload';
 import { LoginResponse } from '../components/auth/login/login-response.payload';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Router } from '@angular/router';
+import jwtDecode from 'jwt-decode';
+import { JwtPayload } from './jwt-payload.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +19,8 @@ export class AuthService {
     username: this.getUserName()
   }
 
-  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService ) { 
+  constructor(private httpClient: HttpClient, private localStorage: LocalStorageService,
+    private router: Router ) { 
 
   }
 
@@ -59,17 +63,17 @@ export class AuthService {
   }
 
   logout() {
-    this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
+    this.httpClient.post('http://localhost:8081/api/auth/logout', this.refreshTokenPayload,
       { responseType: 'text' })
       .subscribe(data => {
         console.log(data);
-      }, error => {
-        throwError(error);
-      })
+      });
     this.localStorage.clear('authenticationToken');
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+    this.router.navigate(['/login']);
+    
   }
 
   getUserName() {
@@ -79,7 +83,19 @@ export class AuthService {
     return this.localStorage.retrieve('refreshToken');
   }
 
+  decodeToken(): JwtPayload | null {
+    const token:string = this.getJwtToken();
+    if (token) {
+      console.log(jwtDecode(token))
+      return jwtDecode(token);
+    }
+    return null;
+  }
+
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
   }
 } 
+
+
+
