@@ -23,6 +23,7 @@ import { counterReducer } from './store/counter.reducer';
 import { StoreDevtools } from '@ngrx/store-devtools';
 import { StateComponent } from './services/state/state.component';
 import { cartReducer } from './store/cart/cart.reducer';
+import { AddProductComponent } from './components/product/add-product/add-product.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { cartReducer } from './store/cart/cart.reducer';
     ProductCardComponent,
     CartComponent,
     OrdersComponent,
-    StateComponent
+    StateComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
